@@ -10,7 +10,7 @@ class Snake {
 
     }
 
-    move () {
+    move() {
         var newRect;
         if(this.rotateX == 1) {
             newRect = {
@@ -36,6 +36,32 @@ class Snake {
                 y: this.tail[this,tail.length - 1].y - this.size
             }
         } 
+
+        this.tail.shift()
+        this.tail.push(newRect)
+    }
+}
+
+class Apple {
+    constructor(){
+        var isTouching;
+        while(true) {
+            isTouching = false;
+            this.x = Math.floor(Math.random() * canvas.width / snake.size) * snake.size
+            this.y = Math.floor(Math.random() * canvas.height / snake.size) * snake.size
+
+            for (var i = 0; i <snake.tail.length; i++){
+                if (this.x == snake.tail[i].x && this.y == snake.tail[y].y) {
+                    isTouching = true
+                }
+            }
+
+            if (!isTouching) {
+                break;
+            }
+            this.color = "pink"
+            this.size = snake.size
+        }
     }
 }
 
@@ -59,4 +85,17 @@ function gameLoop () {
 function show () {
     update();
     draw();
+}
+
+function update() {
+
+}
+
+function draw() {
+    createRect(0,0, canvas.width, canvas.height, "black")
+    createRect(0,0, canvas.width, canvas.height)
+    for (var i = 0; i <snake.tail.length; i++) {
+        createRect(snake.tail[i].x + 2.5, snake.tail[i].y + 2.5,
+            snake.size - 5, snake.size - 5, 'white')
+    }
 }
